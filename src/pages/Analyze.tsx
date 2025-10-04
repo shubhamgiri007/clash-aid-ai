@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Upload, Zap, Target, Shield, Swords, Crown } from "lucide-react";
+import { Upload, Zap, Target, Crown, Swords } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import strategyMap from "@/assets/strategy-map.jpg";
@@ -11,6 +11,7 @@ const Analyze = () => {
   const strategies = [
     {
       name: "Queen Walk + Zap Lalo",
+      emoji: "👑",
       difficulty: "Advanced",
       success: "94%",
       icon: Crown,
@@ -19,6 +20,7 @@ const Analyze = () => {
     },
     {
       name: "Electro Dragon Spam",
+      emoji: "⚡",
       difficulty: "Intermediate",
       success: "89%",
       icon: Zap,
@@ -27,6 +29,7 @@ const Analyze = () => {
     },
     {
       name: "P.E.K.K.A Smash",
+      emoji: "🔨",
       difficulty: "Beginner",
       success: "87%",
       icon: Swords,
@@ -36,22 +39,28 @@ const Analyze = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen gradient-stone">
       {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
+      <header className="gradient-wood shadow-wood sticky top-0 z-50 border-b-4 border-amber-900">
+        <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <Link to="/">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Clash Attack AI
-              </h1>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center shadow-gold border-2 border-yellow-600">
+                  <Swords className="w-7 h-7 text-amber-900" />
+                </div>
+                <div>
+                  <h1 className="text-2xl text-white text-outline-light">Clash Attack AI</h1>
+                  <p className="text-xs text-amber-200">3-Star Strategy Master</p>
+                </div>
+              </div>
             </Link>
             <div className="flex gap-3">
-              <Button variant="ghost" size="sm" asChild>
+              <Button variant="ghost" size="sm" className="text-white hover:bg-white/10" asChild>
                 <Link to="/auth">Login</Link>
               </Button>
-              <Button variant="premium" size="sm">
-                Go Premium
+              <Button variant="secondary" size="sm">
+                👑 Go Premium
               </Button>
             </div>
           </div>
@@ -61,30 +70,28 @@ const Analyze = () => {
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Upload Section */}
         {!uploaded ? (
-          <Card className="p-8 md:p-12 text-center border-border bg-card shadow-[0_10px_40px_-10px_hsl(0_0%_0%/0.5)]">
+          <Card className="p-8 md:p-12 text-center border-4 border-border bg-card shadow-stone">
             <div className="max-w-2xl mx-auto">
               <div className="mb-6">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Upload className="w-10 h-10 text-primary" />
-                </div>
-                <h2 className="text-3xl font-bold mb-3">Upload Your Base Layout</h2>
-                <p className="text-muted-foreground text-lg">
-                  Drop a screenshot or image of your enemy's base and let the AI find the perfect 3-star strategy
+                <div className="text-6xl mb-4">🎯</div>
+                <h2 className="text-4xl font-bold mb-3 text-outline">Upload Enemy Base</h2>
+                <p className="text-lg font-semibold">
+                  Drop a screenshot of your opponent's base and let the AI Chief scout the perfect 3-star strategy! ⚔️
                 </p>
               </div>
 
-              <div className="border-2 border-dashed border-border rounded-lg p-12 hover:border-primary/50 transition-smooth cursor-pointer bg-muted/20">
+              <div className="border-4 border-dashed border-border rounded-2xl p-12 hover:border-primary transition-bounce cursor-pointer bg-muted/30 shadow-stone">
                 <input type="file" className="hidden" id="file-upload" accept="image/*" />
                 <label htmlFor="file-upload" className="cursor-pointer">
-                  <Shield className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                  <p className="text-lg font-medium mb-2">Click to upload or drag and drop</p>
-                  <p className="text-sm text-muted-foreground">PNG, JPG up to 10MB</p>
+                  <div className="text-6xl mb-4">🛡️</div>
+                  <p className="text-lg font-bold mb-2">Click to upload or drag base image</p>
+                  <p className="text-sm font-semibold text-muted-foreground">PNG, JPG up to 10MB</p>
                 </label>
               </div>
 
               <Button
-                variant="hero"
-                size="lg"
+                variant="default"
+                size="xl"
                 className="mt-6 w-full sm:w-auto"
                 onClick={() => setUploaded(true)}
               >
@@ -96,18 +103,21 @@ const Analyze = () => {
         ) : (
           /* Analysis Results */
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap gap-4">
               <div>
-                <h2 className="text-3xl font-bold mb-2">Base Analysis Complete</h2>
-                <p className="text-muted-foreground">Town Hall 12 • 3 Attack Strategies Found</p>
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-4xl">✅</span>
+                  <h2 className="text-3xl font-bold text-outline">Base Analyzed!</h2>
+                </div>
+                <p className="text-lg font-bold">Town Hall 12 • 3 Attack Strategies Found 🎯</p>
               </div>
               <Button variant="outline" onClick={() => setUploaded(false)}>
-                Upload New Base
+                📤 Upload New Base
               </Button>
             </div>
 
             {/* Base Preview */}
-            <Card className="overflow-hidden border-border bg-card shadow-[0_10px_40px_-10px_hsl(0_0%_0%/0.5)]">
+            <Card className="overflow-hidden border-4 border-border bg-card shadow-stone">
               <img
                 src={strategyMap}
                 alt="Base Layout Analysis"
@@ -120,32 +130,30 @@ const Analyze = () => {
               {strategies.map((strategy, idx) => (
                 <Card
                   key={idx}
-                  className="p-6 border-border bg-card hover:border-primary/50 transition-smooth cursor-pointer shadow-[0_10px_40px_-10px_hsl(0_0%_0%/0.5)] hover:shadow-glow"
+                  className="p-6 border-4 border-border bg-card hover:border-primary transition-bounce cursor-pointer shadow-stone hover:shadow-gold hover:scale-[1.02]"
                 >
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between flex-wrap gap-4">
                     <div className="flex gap-4 items-start flex-1">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <strategy.icon className="w-6 h-6 text-primary" />
-                      </div>
+                      <div className="text-5xl">{strategy.emoji}</div>
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
                           <h3 className="text-xl font-bold">{strategy.name}</h3>
                           {strategy.premium && (
-                            <span className="px-2 py-1 text-xs font-bold rounded gradient-premium">
-                              PREMIUM
+                            <span className="px-3 py-1 text-xs font-bold rounded-full gradient-premium text-white border-2 border-purple-700">
+                              👑 PREMIUM
                             </span>
                           )}
                         </div>
-                        <div className="flex gap-4 text-sm text-muted-foreground">
-                          <span>{strategy.difficulty}</span>
+                        <div className="flex gap-4 text-sm font-bold flex-wrap">
+                          <span className="text-muted-foreground">{strategy.difficulty}</span>
                           <span>•</span>
-                          <span>{strategy.steps} Steps</span>
+                          <span className="text-muted-foreground">{strategy.steps} Steps</span>
                           <span>•</span>
-                          <span className="text-primary font-medium">{strategy.success} Success Rate</span>
+                          <span className="text-primary">{strategy.success} Success 🎯</span>
                         </div>
                       </div>
                     </div>
-                    <Button variant={strategy.premium ? "premium" : "hero"} size="sm">
+                    <Button variant={strategy.premium ? "secondary" : "default"} size="sm">
                       View Strategy
                     </Button>
                   </div>

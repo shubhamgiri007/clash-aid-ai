@@ -6,95 +6,112 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "react-router-dom";
 import { Swords } from "lucide-react";
+import wizardChar from "@/assets/wizard-char.png";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen gradient-stone flex items-center justify-center p-4">
+      <div className="w-full max-w-4xl">
         <Link to="/" className="flex justify-center mb-8">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg gradient-attack flex items-center justify-center">
-              <Swords className="w-6 h-6 text-white" />
+          <div className="flex items-center gap-3">
+            <div className="w-14 h-14 rounded-xl gradient-gold flex items-center justify-center shadow-gold border-2 border-yellow-600">
+              <Swords className="w-8 h-8 text-amber-900" />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Clash Attack AI
-            </span>
+            <div>
+              <span className="text-3xl font-bold text-outline">Clash Attack AI</span>
+              <p className="text-sm font-bold text-muted-foreground">3-Star Strategy Master</p>
+            </div>
           </div>
         </Link>
 
-        <Card className="p-6 border-border bg-card shadow-[0_10px_40px_-10px_hsl(0_0%_0%/0.5)]">
-          <Tabs defaultValue="login" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="signup">Sign Up</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="login">
-              <form className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="login-email">Email</Label>
-                  <Input
-                    id="login-email"
-                    type="email"
-                    placeholder="warrior@clash.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="login-password">Password</Label>
-                  <Input
-                    id="login-password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <Button variant="hero" className="w-full" size="lg">
-                  Login to Battle
-                </Button>
-              </form>
-            </TabsContent>
-
-            <TabsContent value="signup">
-              <form className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
-                  <Input
-                    id="signup-email"
-                    type="email"
-                    placeholder="warrior@clash.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
-                  <Input
-                    id="signup-password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="confirm-password">Confirm Password</Label>
-                  <Input id="confirm-password" type="password" />
-                </div>
-                <Button variant="hero" className="w-full" size="lg">
-                  Join the Battle
-                </Button>
-              </form>
-            </TabsContent>
-          </Tabs>
-
-          <div className="mt-6 pt-6 border-t border-border text-center text-sm text-muted-foreground">
-            By continuing, you agree to our Terms of Service and Privacy Policy
+        <div className="grid md:grid-cols-2 gap-6 items-center">
+          {/* Character */}
+          <div className="hidden md:block">
+            <img src={wizardChar} alt="Wizard" className="w-full max-w-md mx-auto drop-shadow-2xl" />
+            <div className="text-center mt-4">
+              <p className="text-2xl font-bold text-outline">Join the Battle! ⚔️</p>
+            </div>
           </div>
-        </Card>
+
+          {/* Auth Form */}
+          <Card className="p-6 md:p-8 border-4 border-border bg-card shadow-stone">
+            <Tabs defaultValue="login" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 mb-6 bg-muted border-2 border-border">
+                <TabsTrigger value="login" className="font-bold">Login</TabsTrigger>
+                <TabsTrigger value="signup" className="font-bold">Sign Up</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="login">
+                <form className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="login-email" className="font-bold">Email</Label>
+                    <Input
+                      id="login-email"
+                      type="email"
+                      placeholder="warrior@clash.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="border-2 border-border"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="login-password" className="font-bold">Password</Label>
+                    <Input
+                      id="login-password"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="border-2 border-border"
+                    />
+                  </div>
+                  <Button variant="default" className="w-full" size="lg">
+                    ⚔️ Login to Battle
+                  </Button>
+                </form>
+              </TabsContent>
+
+              <TabsContent value="signup">
+                <form className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-email" className="font-bold">Email</Label>
+                    <Input
+                      id="signup-email"
+                      type="email"
+                      placeholder="warrior@clash.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="border-2 border-border"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-password" className="font-bold">Password</Label>
+                    <Input
+                      id="signup-password"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="border-2 border-border"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="confirm-password" className="font-bold">Confirm Password</Label>
+                    <Input id="confirm-password" type="password" className="border-2 border-border" />
+                  </div>
+                  <Button variant="default" className="w-full" size="lg">
+                    🛡️ Join the Clan
+                  </Button>
+                </form>
+              </TabsContent>
+            </Tabs>
+
+            <div className="mt-6 pt-6 border-t-2 border-border text-center text-sm font-bold text-muted-foreground">
+              By continuing, you agree to battle with honor! ⚔️
+            </div>
+          </Card>
+        </div>
       </div>
     </div>
   );
